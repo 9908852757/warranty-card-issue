@@ -8,13 +8,16 @@ one-time Google OAuth setup and a hosted website; see **Gmail Setup.md**.
 ## Use
 
 1. Enter the client, vehicle, purchase and product details.
-2. Type the warranty period in your own words.
+2. Open **Choose warranty options** and select any combination of artificial
+   leather (2 years), genuine leather (3 years) and electronics (1 year).
+   You can also type or edit the warranty period in your own words.
 3. Choose a sales person. Their contact details fill automatically and remain
    editable. Blank contact fields are optional.
 4. Leave the invoice blank if it is not available. The invoice label and value
    are then omitted from both the card and email.
-5. Connect the Gmail account you want to send from. Review the From, To, CC,
-   message and PDF preview.
+5. Click **Sign in with Google**, choose the Gmail account you want to send
+   from, and allow Gmail sending in Google's permission window. Review the
+   From, To, CC, message and PDF preview. Signing in does not send an email.
 6. Click **Send styled email + PDF**. The app generates the current card and
    sends the formatted message with that PDF attached. No copying or pasting.
 

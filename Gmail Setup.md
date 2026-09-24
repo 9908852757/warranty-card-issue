@@ -37,7 +37,7 @@ This app uses Google's browser popup/token flow, not a server callback.
 
 1. Open the hosted app in Chrome or Edge.
 2. Expand **One-time Gmail setup**, paste the public web client ID and save.
-3. Click **Connect Gmail**, choose the sending account, and review Google's
+3. Click **Sign in with Google**, choose the sending account, and review Google's
    permission request. The From address appears after connection succeeds.
 4. Enter a card, review it, and click **Send styled email + PDF**. This action
    sends the email immediately, including the PDF and both fixed CC recipients.
