@@ -1,73 +1,61 @@
 # Cetus Warranty Card
 
-A static browser app that creates the Cetus warranty PDF and sends the styled
-email through the connected Gmail account, with the PDF attached automatically.
-No server, database or client secret is required. Direct sending does require
-one-time Google OAuth setup and a hosted website; see **Gmail Setup.md**.
+A static app for creating Cetus warranty PDFs and preparing styled Gmail emails.
+No Google app registration, API connection, server or database is required.
 
 ## Use
 
 1. Enter the client, vehicle, purchase and product details.
-2. Open **Choose warranty options** and select any combination of artificial
-   leather (2 years), genuine leather (3 years) and electronics (1 year).
-   You can also type or edit the warranty period in your own words.
+2. Select any combination of artificial leather (2 years), genuine leather
+   (3 years) and electronics (1 year), or type the warranty period manually.
 3. Choose a sales person. Their contact details fill automatically and remain
    editable. Blank contact fields are optional.
-4. Leave the invoice blank if it is not available. The invoice label and value
-   are then omitted from both the card and email.
-5. Click **Sign in with Google**, choose the Gmail account you want to send
-   from, and allow Gmail sending in Google's permission window. Review the
-   From, To, CC, message and PDF preview. Signing in does not send an email.
-6. Click **Send styled email + PDF**. The app generates the current card and
-   sends the formatted message with that PDF attached. No copying or pasting.
+4. Leave the invoice blank to omit its label and value from the card and email.
+5. Click **Download PDF**. The filename includes the client's name.
+6. Click **1. Copy styled email**, then **2. Draft email**.
+7. Gmail opens with the client, both CC addresses and subject already filled in.
+   Paste into the body with Ctrl+V (Command+V on Mac), attach the downloaded PDF,
+   check the From address, and send from Gmail.
 
-**Download PDF** remains available separately, including from the local HTML
-file. Sending needs the hosted HTTPS app, internet access and Google permission.
-You may need to reconnect Gmail after a refresh or when the connection expires.
+The app supplies an empty draft body. Gmail may insert your usual signature.
+Use normal paste and keep Gmail's **Plain text mode** off to retain the design.
+If you change card details after copying, copy again and download the updated PDF.
 
-Every email includes ashwathsuresh@bableather.com and
-sales@cetusautomotives.com in CC. The sender is the Google account you connect;
-selecting a sales person does not change it.
+The From address comes from the Gmail account opened in the browser. If you use
+multiple accounts, expand **Choose a different Gmail account (optional)** and
+enter the desired sending address. This selects an account; it does not change
+the sales person on the card or create a sender alias.
+
+Every draft includes ashwathsuresh@bableather.com and
+sales@cetusautomotives.com in CC. The app never clicks Send.
+
+## PDF attachment
+
+Attach the PDF manually from Downloads or drag it into the Gmail draft. This
+version uses a Gmail compose link and does not upload an attachment to Gmail.
+PDF generation and the original warranty wording are unchanged.
 
 ## Host with GitHub and Vercel
 
-For the hosting ZIP, upload the extracted files at the repository root. The
-included configuration uses Other, no build command and the root as output.
+Upload the hosting ZIP's extracted files at the repository root. Use Other,
+no build command, and the root as output. The included vercel.json sets these.
 The development source project instead serves its **dist** directory.
-Configure the Google connection for the final website address after hosting.
 
-## Data and delivery
+The standalone HTML also supports PDF generation locally. For the most reliable
+clipboard behavior, use Chrome or Edge; the hosted version should use HTTPS.
 
-Client details remain in browser memory until Send is clicked. The app sends the
-message and attachment directly to Google's Gmail API. Access tokens are held
-only in memory, never in files or browser storage. Only the public OAuth client
-ID may be saved as a local browser preference.
+## Data and source files
 
-The Send button is disabled during delivery and after confirmed success for the
-same details. The app never retries sending automatically. If a connection
-failure makes delivery uncertain, check Gmail's Sent folder before enabling
-another attempt. These guards last for the current page session.
+Client details stay in page memory until copied, downloaded or passed to Gmail.
+Only the optional sending account address is stored as a browser preference.
+No Gmail access tokens or passwords are requested or stored.
 
-The supplied logo is embedded in the card. Warranty wording is preserved. PDF
-text is a high-resolution image, so it is not selectable. The styled email uses
-the logo hosted on the Cetus website; recipients may need to allow images.
+- dist/card-engine.js: card, styled email, sales presets and Gmail compose URL.
+- dist/app.js: form, rich-text clipboard and draft workflow.
+- dist/index.html and dist/styles.css: interface and styling.
 
-## Source files
+Rebuild the standalone HTML after source edits. It includes the card logo and
+all local code. The email logo loads from the Cetus website; recipients may need
+to allow images. PDF text is a high-resolution image rather than selectable text.
 
-- dist/card-engine.js: card, email template, sales presets and fixed CC.
-- dist/gmail-mailer.js: Google connection, MIME email and Gmail send request.
-- dist/gmail-config.js: optional shared public OAuth client ID.
-- dist/app.js: form and sending workflow.
-
-Rebuild the standalone HTML after editing these source files. The HTML package
-includes all local code, the logo and pdf-lib; Google's sign-in library loads
-online only for Gmail connection.
-
-## Validation
-
-Card rendering, optional invoice, manual warranty text, message encoding,
-attachment contents and simulated Gmail responses are checked locally.
-Live Gmail authorization and sending require the owner's Google client ID;
-no live send is claimed until that setup is completed and verified.
-
-PDF generation uses pdf-lib; see PDF-LIB-LICENSE.md in the hosting ZIP.
+See **Gmail Setup.md** for the email steps and **PDF-LIB-LICENSE.md** for pdf-lib.
